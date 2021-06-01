@@ -8,6 +8,8 @@ class Nave:
         self.arma = a 
     def vidaa(self,dano):
         self.vida -= dano
+        if self.vida <= 0:
+            self.vida = 0
     def combustivel(self,g):
         self.comb -= g
     def municao(self, g):
@@ -24,3 +26,5 @@ class Darth:
 
     def deLife(self, d):
         self.life -= d
+        if self.life<0:
+            self.life=0
