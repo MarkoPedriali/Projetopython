@@ -1,3 +1,4 @@
+
 from nave import Nave
 import random
 from time import sleep
@@ -6,61 +7,36 @@ def final(): #AQUI É A FUNÇÃO QUE SIMULA O FINAL DO JOGO. O CORPO DO PROGRAMA
     print('')
     print(f'Comandante {nomeJogador} Essa é a sua chance!  Seu alvo está a seu alcance.\nSua tripulação aguarda pelas suas ordens',)
     darthV = Darth()
+    atk=0
     if jogador.vida > 0:
         while True:
             acao = int(input(f'[1] para Atacar\n[2] para Desistir\n[3] para Status da nave\n'))
             if acao == 1:
-                if jogador.arma == 'Lazer':
+                if jogador.arma == 'Laser':
                     atk = random.randint(60,80)
-                    danosofrido = random.randint(30,70)
-                    darthV.deLife(atk)
-                    jogador.vidaa(danosofrido)
-                    print(f'Você infringiu {atk} de dano no seu oponente.')
-                    print(f'Você recebeu {danosofrido} de dano.')
-                    print(f'Sua Vida      ----- {jogador.vida}')
-                    print(f'Vida do Darth ----- {darthV.life}')
-                    if jogador.vida <= 0:
-                        print('')
-                        print("Você foi derrotado em batalha! Se prepare melhor na próxima.")
-                        break
-                    if darthV.life <= 0:
-                        print('')
-                        print('Grande vitória!!! Você capturou o Darth Vader e agora ele será levado para julgamento.')
-                        break
                 if jogador.arma == 'Shockwave':
                     atk = random.randint(30,60)
-                    danosofrido = random.randint(30,70)
-                    darthV.deLife(atk)
-                    jogador.vidaa(danosofrido)
-                    print(f'Você infringiu {atk} de dano no seu oponente.')
-                    print(f'Você recebeu {danosofrido} de dano.')
-                    print(f'Sua Vida      ----- {jogador.vida}')
-                    print(f'Vida do Darth ----- {darthV.life}')
-                    if jogador.vida <= 0:
-                        print('')
-                        print("Você foi derrotado em batalha! Se prepare melhor na próxima.")
-                        break
-                    if darthV.life <= 0:
-                        print('')
-                        print('Grande vitória!!! Você capturou o Darth Vader e agora ele será levado para julgamento.')
-                        break
                 if jogador.arma == 'Igunfire':
                     atk = random.randint(20,40)
-                    danosofrido = random.randint(30,70)
-                    darthV.deLife(atk)
-                    jogador.vidaa(danosofrido)
-                    print(f'Você infringiu {atk} de dano no seu oponente.')
-                    print(f'Você recebeu {danosofrido} de dano.')
-                    print(f'Sua Vida      ----- {jogador.vida}')
-                    print(f'Vida do Darth ----- {darthV.life}')
-                    if jogador.vida <= 0:
-                        print('')
-                        print("Você foi derrotado em batalha! Se prepare melhor na próxima.")
-                        break
-                    if darthV.life <= 0:
-                        print('')
-                        print('Grande vitória!!! Você capturou o Darth Vader e agora ele será levado para julgamento.')
-                        break
+                
+                danosofrido = random.randint(30,70)
+                darthV.deLife(atk)
+                jogador.vidaa(danosofrido)
+                print(f'Você infringiu {atk} de dano no seu oponente.')
+                print(f'Você recebeu {danosofrido} de dano.')
+                print(f'Sua Vida      ----- {jogador.vida}')
+                print(f'Vida do Darth ----- {darthV.life}')
+                if jogador.vida==0 and darthV.life==0:
+                    print("Ambos derrotados.")
+                    break
+                if jogador.vida <= 0:
+                    print('')
+                    print("Você foi derrotado em batalha! Se prepare melhor na próxima.")
+                    break
+                if darthV.life <= 0:
+                    print('')
+                    print('Grande vitória!!!')
+                    break
             if acao == 2:
                 print('Nem todos os guerreiros estão preparados para grandes desafios. Volte quando estiver preparado.')
                 break
@@ -68,15 +44,16 @@ def final(): #AQUI É A FUNÇÃO QUE SIMULA O FINAL DO JOGO. O CORPO DO PROGRAMA
                 jogador.status()
     else:
         print('Não foi dessa vez. Você perdeu!')
+        
 
 # AQUI COMEÇA O CORPO DO PROGRAMA
-listArmas = {'Lazer':30,'Shockwave':45,'Igunfire':100}
+listArmas = {'Lazer': 30,'Shockwave': 45,'Igunfire': 100}
 nomeJogador = input('Digite seu nome:\n').upper() #nome do jogador/comandante
 print(f'Ola, {nomeJogador}, voce foi escolhido para ser o comandante de uma nave espacial em uma missao de captura ao Darth Vader.  Seu objetivo é captura-lo e trazer de volta a terra para julgmento.')
 nomeNave = input('Escolha o nome da sua nave:\n') #nome nave
-escolhaArma=int(input(f'Escolha sua arma:\n[1] Lazer -- dano: 60-80 -- muniçao: 30\n[2] Shockwave -- dano: 30-60 -- muniçao:50\n[3] Igunfire -- dano:20-40 -- muniçao: 150\n').upper())
+escolhaArma=int(input(f'Escolha sua arma:\n[1] Lazer -- dano: 60-80 -- muniçao: 30\n[2] Shockwave -- dano: 30-60 -- muniçao: 50\n[3] Igunfire -- dano: 20-40 -- muniçao: 150\n').upper())
 if escolhaArma == 1: # a variavel jogador é o item que passa os parametros para a classe inicializar os atributos
-    jogador = Nave(nomeNave,'Lazer',30)
+    jogador = Nave(nomeNave,'Laser',30)
 if escolhaArma == 2:
     jogador = Nave(nomeNave,'Shockwave', 45)
 if escolhaArma == 3:
@@ -105,7 +82,7 @@ while True:
         decisao = int(input(f'Seu sub-comandande pergunta qual melhor decisao.\n[1] para seguir em frente\n[2] para voltar\n'))
         if decisao == 1:
             num = random.randint(1,3)
-            print('Uma gravidade esmadadora começa a comprimir a nave, os sistemas de alerta dispararam. Pela sua experiencia, trata-se de um burado negro.')
+            print('Uma gravidade esmagadora começa a comprimir a nave, os sistemas de alerta dispararam. Pela sua experiencia, trata-se de um buraco negro.')
             tecla = input(f'Aperte qualquer tecla para tentar a sorte e fugir>>>>\n')
             for c in range(3,0,-1):
                 sleep(1)
@@ -152,4 +129,3 @@ while True:
         break
 
 print('FIM DO JOGO')
-
